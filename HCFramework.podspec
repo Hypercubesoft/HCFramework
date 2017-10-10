@@ -15,6 +15,6 @@ s.author           = { "Hypercubesoft" => "office@hypercubesoft.com" }
 s.source           = { :git => "https://github.com/Hypercubesoft/HCFramework.git", :tag => "#{s.version}"}
 
 s.ios.deployment_target = "9.0"
-s.source_files = "HCFramework/*", "HCFramework/**/*"
+s.source_files = "HCFramework", "HCFramework/*", "HCFramework/**/*"
 
 end
