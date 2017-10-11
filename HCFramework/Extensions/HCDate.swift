@@ -5,7 +5,7 @@
 //  Copyright © 2017 Hypercube. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 // MARK: - Date extension
 extension Date

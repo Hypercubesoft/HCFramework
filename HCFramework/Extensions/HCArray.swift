@@ -25,7 +25,7 @@ extension Array
     ///
     /// - Parameter n: The number of elements of the resulting shuffled array
     /// - Returns: Shuffled array with n elements. If n is greater than the number of elements of the original array, the array will contain the number of elements of the original array.
-    public func hcShuffleAncSlice(numberOfElements n: Int) -> Array
+    public func hcShuffleAndSlice(numberOfElements n: Int) -> Array
     {
         var array = Array()
         array.append(contentsOf: self)

@@ -26,7 +26,7 @@ extension UIImage
     ///
     /// - Parameter percentage: CGFloat value for percentage used to rezize UIImage object
     /// - Returns: Resized UIImage object
-    public func hcResized(withPercentage percentage: CGFloat) -> UIImage?
+    open func hcResized(withPercentage percentage: CGFloat) -> UIImage?
     {
         let canvasSize = CGSize(width: size.width * percentage, height: size.height * percentage)
         UIGraphicsBeginImageContextWithOptions(canvasSize, false, scale)
@@ -39,7 +39,7 @@ extension UIImage
     ///
     /// - Parameter width: CGFloat value for width used to rezize UIImage object
     /// - Returns: Resized UIImage object
-    public func hcResized(toWidth width: CGFloat) -> UIImage?
+    open func hcResized(toWidth width: CGFloat) -> UIImage?
     {
         let canvasSize = CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))
         UIGraphicsBeginImageContextWithOptions(canvasSize, false, scale)
@@ -52,7 +52,7 @@ extension UIImage
     ///
     /// - Parameter color: UIColor value to applied Blend Overlay mode on UIImage object.
     /// - Returns: UIImage object over which it is applied Blend Overlay mode
-    public func hcOverlay(with color: UIColor) -> UIImage? {
+    open func hcOverlay(with color: UIColor) -> UIImage? {
         return self.hcPerformBlend(blendMode: .overlay, color: color)
     }
     
@@ -60,7 +60,7 @@ extension UIImage
     ///
     /// - Parameter color: UIColor value to applied Blend SoftLight mode on UIImage object
     /// - Returns: UIImage object over which it is applied Blend SoftLight mode
-    public func hcSoftLight(with color: UIColor) -> UIImage? {
+    open func hcSoftLight(with color: UIColor) -> UIImage? {
         return self.hcPerformBlend(blendMode: .softLight, color: color)
     }
     
@@ -96,7 +96,7 @@ extension UIImage
     ///
     /// - Parameter rect: CGRect value for rect used to crop UIImage object
     /// - Returns: Croped UIImage object
-    public func hcCropImage(toRect rect:CGRect) -> UIImage? {
+    open func hcCropImage(toRect rect:CGRect) -> UIImage? {
         var rect = rect
         rect.origin.y = rect.origin.y * self.scale
         rect.origin.x = rect.origin.x * self.scale
@@ -114,7 +114,7 @@ extension UIImage
     /// Perform grayscale (CIPhotoEffectMono) filter on current image
     ///
     /// - Returns: Grayscale version of current image.
-    public func hcConvertToGrayScale() -> UIImage {
+    open func hcConvertToGrayScale() -> UIImage {
         let filter: CIFilter = CIFilter(name: "CIPhotoEffectMono")!
         filter.setDefaults()
         filter.setValue(CoreImage.CIImage(image: self)!, forKey: kCIInputImageKey)
@@ -126,7 +126,7 @@ extension UIImage
     ///
     /// - Parameter blurRadius: Radius for blurring image. Default value is 10.0.
     /// - Returns: Blurred image
-    public func hcBlur(blurRadius:CGFloat = 10.0) -> UIImage {
+    open func hcBlur(blurRadius:CGFloat = 10.0) -> UIImage {
         let context = CIContext(options: nil)
         let inputImage = CIImage(image: self)
         let clampFilter = CIFilter(name: "CIAffineClamp")
@@ -144,7 +144,7 @@ extension UIImage
     ///
     /// - Parameter imageView: UIImageView from which the function returns the UIImage object.
     /// - Returns: UIImage object from UIImageView.
-    static func hcVisibleImage(from imageView: UIImageView) -> UIImage {
+    static open func hcVisibleImage(from imageView: UIImageView) -> UIImage {
         UIGraphicsBeginImageContext(imageView.frame.size)
         let context: CGContext? = UIGraphicsGetCurrentContext()
         imageView.layer.render(in: context!)
