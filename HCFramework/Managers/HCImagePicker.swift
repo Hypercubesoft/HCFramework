@@ -8,26 +8,26 @@
 
 import UIKit
 
-typealias CompletionHandler = (_ success:Bool, _ res:AnyObject?) -> Void
+public typealias CompletionHandler = (_ success:Bool, _ res:AnyObject?) -> Void
 
 // NOTE: Add NSCameraUsageDescription to plist file
 
 open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
     open var imageSelectionInProgress = false
-    var imageSelectCompletitionHandler:CompletionHandler?
+    open var imageSelectCompletitionHandler:CompletionHandler?
     
     open static let sharedManager: HCImagePicker =
-    {
-        let instance = HCImagePicker()
-        return instance
+        {
+            let instance = HCImagePicker()
+            return instance
     }()
     
     /// Open UIImagePickerController with Camera like source type with the possibility of setting Completition Handler Function.
     ///
     /// - Parameters:
     ///   - completitionHandler: Completion Handler Function. By default it is not set.
-    func takePictureFromCamera(completitionHandler:CompletionHandler? = nil)
+    open func takePictureFromCamera(completitionHandler:CompletionHandler? = nil)
     {
         self.imageSelectCompletitionHandler = completitionHandler
         self.openCamera()
@@ -37,7 +37,7 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
     ///
     /// - Parameters:
     ///   - completitionHandler: Completion Handler Function. By default it is not set.
-    func getPictureFromGallery(completitionHandler:CompletionHandler? = nil)
+    open func getPictureFromGallery(completitionHandler:CompletionHandler? = nil)
     {
         self.imageSelectCompletitionHandler = completitionHandler
         self.openGallery()
@@ -51,7 +51,7 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
     ///   - fromGalleryButtonTitle: From gallery button title. Default value is "From Gallery".
     ///   - cancelButtonTitle: Cancel button title. Default value is "Cancel".
     ///   - completitionHandler: Completion Handler Function. By default it is not set.
-    func selectPicture(title:String = "Select picture", fromCameraButtonTitle:String = "From Camera", fromGalleryButtonTitle:String = "From Gallery", cancelButtonTitle:String = "Cancel", completitionHandler:CompletionHandler? = nil)
+    open func selectPicture(title:String = "Select picture", fromCameraButtonTitle:String = "From Camera", fromGalleryButtonTitle:String = "From Gallery", cancelButtonTitle:String = "Cancel", completitionHandler:CompletionHandler? = nil)
     {
         self.imageSelectCompletitionHandler = completitionHandler
         HCDialog.showDialogWithMultipleActions(message: "", title: title, alertButtonTitles:
@@ -90,7 +90,7 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
             UIApplication.shared.keyWindow?.rootViewController?.present(imagePicker, animated: true, completion: nil)
         }
     }
-
+    
     /// Open UIImagePickerController with PhotosAlbum like source type
     private func openGallery()
     {

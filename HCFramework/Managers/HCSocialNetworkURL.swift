@@ -9,7 +9,7 @@
 import UIKit
 
 // Note: Add LSApplicationQueriesSchemes for every social network in in plist file
-enum HCPageType
+public enum HCPageType
 {
     case hcUndefined
     case hcFacebookProfile
@@ -29,38 +29,37 @@ open class HCSocialNetworkURL: NSObject {
     open var id:String = ""
     open var link:String = ""
     open var urlScheme:String = ""
-    var pageType:HCPageType = .hcUndefined
+    open var pageType:HCPageType = .hcUndefined
     
-    
-    init(id:String, link:String, pageType:HCPageType)
+    public init(id:String, link:String, pageType:HCPageType)
     {
         self.id = id
         self.link = link
         self.pageType = pageType
         switch pageType
         {
-            case .hcFacebookProfile:
-                self.urlScheme = "fb://"
-            case .hcFacebookGroup:
-                self.urlScheme = "fb://"
-            case .hcFacebookImage:
-                self.urlScheme = "fb://"
-            case .hcFacebookEvent:
-                self.urlScheme = "fb://"
-            case .hcFacebookMessanger:
-                self.urlScheme = "fb://"
-            case .hcTwitterProfile:
-                self.urlScheme = "twitter://"
-            case .hcTwitterStatus:
-                self.urlScheme = "twitter://"
-            case .hcInstagramProfile:
-                self.urlScheme = "instagram://"
-            case .hcInstagramImage:
-                self.urlScheme = "instagram://"
-            case .hcYoutubeVideo:
-                self.urlScheme = "youtube://"
-            default:
-                self.urlScheme = ""
+        case .hcFacebookProfile:
+            self.urlScheme = "fb://"
+        case .hcFacebookGroup:
+            self.urlScheme = "fb://"
+        case .hcFacebookImage:
+            self.urlScheme = "fb://"
+        case .hcFacebookEvent:
+            self.urlScheme = "fb://"
+        case .hcFacebookMessanger:
+            self.urlScheme = "fb://"
+        case .hcTwitterProfile:
+            self.urlScheme = "twitter://"
+        case .hcTwitterStatus:
+            self.urlScheme = "twitter://"
+        case .hcInstagramProfile:
+            self.urlScheme = "instagram://"
+        case .hcInstagramImage:
+            self.urlScheme = "instagram://"
+        case .hcYoutubeVideo:
+            self.urlScheme = "youtube://"
+        default:
+            self.urlScheme = ""
         }
     }
     
@@ -121,7 +120,7 @@ open class HCSocialNetworkURL: NSObject {
                 UIApplication.shared.openURL(URL(string: self.link)!)
             }
         }
-
+        
     }
     
 }
