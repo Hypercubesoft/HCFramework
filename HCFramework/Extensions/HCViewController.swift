@@ -19,7 +19,7 @@ extension UIViewController
     }
     
     /// Close the keyboard
-    open func hcDismissKeyboard()
+    @objc open func hcDismissKeyboard()
     {
         view.endEditing(true)
     }

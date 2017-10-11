@@ -69,7 +69,7 @@ extension String
             endIndex = self.endIndex
         }
         
-        return self[startIndex ..< endIndex]
+        return String(self[startIndex ..< endIndex])
     }
 
     /// Return substring from start position to the end of string.
