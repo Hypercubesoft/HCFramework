@@ -17,7 +17,7 @@ extension String
     ///   - width: The width that the String occupies
     ///   - lineNumber: number of lines for String
     /// - Returns: Height of string
-    func hcTextHeight(font:UIFont, width:CGFloat, lineNumber: Int) -> CGFloat
+    public func hcTextHeight(font:UIFont, width:CGFloat, lineNumber: Int) -> CGFloat
     {
         let label:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
         label.numberOfLines = lineNumber
@@ -35,7 +35,7 @@ extension String
     ///   - from: Index of substring start position in the original string
     ///   - to: Index of substring end position in the original string
     /// - Returns: Substring object
-    func hcSubstring(from: Int?, to: Int?) -> String {
+    public func hcSubstring(from: Int?, to: Int?) -> String {
         
         if let start = from {
             guard start < self.characters.count else {
@@ -76,7 +76,7 @@ extension String
     ///
     /// - Parameter from: Index of substring start position in the original string
     /// - Returns: Substring object
-    func hcSubstring(from: Int) -> String {
+    public func hcSubstring(from: Int) -> String {
         return self.hcSubstring(from: from, to: nil)
     }
     
@@ -84,7 +84,7 @@ extension String
     ///
     /// - Parameter to: Index of substring end position in the original string
     /// - Returns: Substring object
-    func hcSubstring(to: Int) -> String {
+    public func hcSubstring(to: Int) -> String {
         return self.hcSubstring(from: nil, to: to)
     }
     
@@ -94,7 +94,7 @@ extension String
     ///   - from: Index of substring start position in the original string
     ///   - length: Value that contains number of characters in substring starting from 'from' position.
     /// - Returns: Substring object
-    func hcSubstring(from: Int?, length: Int) -> String {
+    public func hcSubstring(from: Int?, length: Int) -> String {
         guard length > 0 else {
             return ""
         }
@@ -115,7 +115,7 @@ extension String
     ///   - length: Substring length
     ///   - to: Index of last character in substring
     /// - Returns: Substring object
-    func hcSubstring(length: Int, to: Int?) -> String {
+    public func hcSubstring(length: Int, to: Int?) -> String {
         guard let end = to, end > 0, length > 0 else {
             return ""
         }
@@ -134,7 +134,7 @@ extension String
     ///
     /// - Parameter withNewLines: Value that determines whether new lines are removed from the original string. Default value is false.
     /// - Returns: Trimed String object
-    func hcTrim(withNewLines: Bool = false) -> String {
+    public func hcTrim(withNewLines: Bool = false) -> String {
         
         if withNewLines
         {

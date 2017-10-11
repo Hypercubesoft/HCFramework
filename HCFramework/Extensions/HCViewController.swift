@@ -11,7 +11,7 @@ import UIKit
 extension UIViewController
 {
     /// Allows you to close the keyboard on a tap anywhere within the controller.
-    func hcHideKeyboardWhenTappedAround()
+    public func hcHideKeyboardWhenTappedAround()
     {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.hcDismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -19,7 +19,7 @@ extension UIViewController
     }
     
     /// Close the keyboard
-    func hcDismissKeyboard()
+    public func hcDismissKeyboard()
     {
         view.endEditing(true)
     }
@@ -29,7 +29,7 @@ extension UIViewController
     /// - Parameters:
     ///   - title: Title for the navigaton header
     ///   - textColor: Text color for the navigaton header
-    func hcSetNavigationHeader(title:String, textColor:UIColor)
+    public func hcSetNavigationHeader(title:String, textColor:UIColor)
     {
         let headerLabel = UILabel()
         headerLabel.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 33.0)
@@ -46,7 +46,7 @@ extension UIViewController
     ///   - leftAction: Left action for the navigaton bar
     ///   - rightIcon: Right icon image for the navigaton bar
     ///   - rightAction: Right action for the navigaton bar
-    func hcSetNavigationBar(leftIcon:UIImage, leftAction:Selector?, rightIcon:UIImage, rightAction:Selector?)
+    public func hcSetNavigationBar(leftIcon:UIImage, leftAction:Selector?, rightIcon:UIImage, rightAction:Selector?)
     {
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: leftIcon, style: .plain, target: self, action: leftAction)

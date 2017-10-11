@@ -49,7 +49,7 @@ extension UIView {
     }
     
     /// Set circled corners of view. Setting will be performed with some delay, because in some cases view frame is unknown.
-    func hcSetCircled()
+    public func hcSetCircled()
     {
         self.perform(#selector(hcSetCircleDelayed), with: nil, afterDelay: 0.001)
     }
@@ -63,7 +63,7 @@ extension UIView {
     /// Set rounded corners of view.
     ///
     /// - Parameter cornerRadius: CGFloat value of corner radius of view.
-    func hcSetCornerRadius(cornerRadius:CGFloat)
+    public func hcSetCornerRadius(cornerRadius:CGFloat)
     {
         self.layer.cornerRadius = cornerRadius
         self.layer.masksToBounds = true
