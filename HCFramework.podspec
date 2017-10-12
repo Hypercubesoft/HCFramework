@@ -9,6 +9,8 @@ s.description      = <<-DESC
 These are internal files we use in our company. We will not add new functions on request.
 DESC
 
+s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3.2' }
+
 s.homepage         = "https://github.com/Hypercubesoft/HCFramework"
 s.license          = { :type => "MIT", :file => "LICENSE" }
 s.author           = { "Hypercubesoft" => "office@hypercubesoft.com" }
