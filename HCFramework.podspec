@@ -2,11 +2,11 @@ Pod::Spec.new do |s|
 
 s.platform = :ios
 s.name             = "HCFramework"
-s.version          = "1.0.3"
-s.summary          = "This are internal files we use in company."
+s.version          = "1.0.4"
+s.summary          = "These are internal files we use in our company."
 
 s.description      = <<-DESC
-This are internal files we use in company. We will not add new functions on request.
+These are internal files we use in our company. We will not add new functions on request.
 DESC
 
 s.homepage         = "https://github.com/Hypercubesoft/HCFramework"
