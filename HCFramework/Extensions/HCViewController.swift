@@ -48,7 +48,7 @@ extension UIViewController
     ///   - title: Navigation bar title
     ///   - font: Navigation bar title font
     ///   - titleColor: Navigation bar title color
-    func hcSetNavigationBar(hidden:Bool, backgroundColor:UIColor = .white, title:String = "", font:UIFont = UIFont.systemFont(ofSize: isIpad ? 34.0 : 17.0), titleColor:UIColor = .black)
+    open func hcSetNavigationBar(hidden:Bool, backgroundColor:UIColor = .white, title:String = "", font:UIFont = UIFont.systemFont(ofSize: 17.0), titleColor:UIColor = .black)
     {
         self.navigationController?.navigationBar.barTintColor = backgroundColor
         self.navigationController?.isNavigationBarHidden = hidden
