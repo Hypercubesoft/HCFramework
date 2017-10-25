@@ -24,21 +24,6 @@ extension UIViewController
         view.endEditing(true)
     }
     
-    /// Set navigation header title and title text color.
-    ///
-    /// - Parameters:
-    ///   - title: Title for the navigaton header
-    ///   - textColor: Text color for the navigaton header
-    open func hcSetNavigationHeader(title:String, textColor:UIColor)
-    {
-        let headerLabel = UILabel()
-        headerLabel.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 33.0)
-        headerLabel.textAlignment = .center
-        headerLabel.text = title
-        headerLabel.textColor = textColor
-        self.navigationItem.titleView = headerLabel
-    }
-    
     /// Set navigation background color header title and title text color.
     ///
     /// - Parameters:
@@ -59,6 +44,21 @@ extension UIViewController
         headerLabel.textColor = titleColor
         headerLabel.font = font
         headerLabel.sizeToFit()
+        self.navigationItem.titleView = headerLabel
+    }
+    
+    /// Set navigation header title and title text color.
+    ///
+    /// - Parameters:
+    ///   - title: Title for the navigaton header
+    ///   - textColor: Text color for the navigaton header
+    open func hcSetNavigationHeader(title:String, textColor:UIColor)
+    {
+        let headerLabel = UILabel()
+        headerLabel.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 33.0)
+        headerLabel.textAlignment = .center
+        headerLabel.text = title
+        headerLabel.textColor = textColor
         self.navigationItem.titleView = headerLabel
     }
     
