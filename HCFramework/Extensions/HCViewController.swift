@@ -39,7 +39,6 @@ extension UIViewController
         self.navigationItem.titleView = headerLabel
     }
     
-    
     /// Set navigation background color header title and title text color.
     ///
     /// - Parameters:
