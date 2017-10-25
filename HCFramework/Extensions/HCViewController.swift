@@ -39,6 +39,30 @@ extension UIViewController
         self.navigationItem.titleView = headerLabel
     }
     
+    
+    /// Set navigation background color header title and title text color.
+    ///
+    /// - Parameters:
+    ///   - hidden: isNavigationBarHiddenand
+    ///   - backgroundColor: Navigation bar background color
+    ///   - title: Navigation bar title
+    ///   - font: Navigation bar title font
+    ///   - titleColor: Navigation bar title color
+    func hcSetNavigationBar(hidden:Bool, backgroundColor:UIColor = .white, title:String = "", font:UIFont = UIFont.systemFont(ofSize: isIpad ? 34.0 : 17.0), titleColor:UIColor = .black)
+    {
+        self.navigationController?.navigationBar.barTintColor = backgroundColor
+        self.navigationController?.isNavigationBarHidden = hidden
+        self.navigationController?.navigationBar.backgroundColor = backgroundColor
+        let headerLabel = UILabel()
+        headerLabel.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 33.0)
+        headerLabel.textAlignment = .center
+        headerLabel.text = title
+        headerLabel.textColor = titleColor
+        headerLabel.font = font
+        headerLabel.sizeToFit()
+        self.navigationItem.titleView = headerLabel
+    }
+    
     /// Set Navigation Bar leftIcon, leftAction, rightIcon and rightAction
     ///
     /// - Parameters:
