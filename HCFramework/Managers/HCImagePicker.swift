@@ -105,13 +105,31 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
         }
     }
     
+    /// Fix orientation for image. This is useful in some cases, for example, when image taken from camera has wrong orientation after upload to server.
+    ///
+    /// - Parameter img: Image for which we need to fix orientation
+    /// - Returns: Image with valid orientation
+    private func fixOrientation(img: UIImage) -> UIImage {
+        if (img.imageOrientation == .up) {
+            return img
+        }
+        
+        UIGraphicsBeginImageContextWithOptions(img.size, false, img.scale)
+        let rect = CGRect(x: 0, y: 0, width: img.size.width, height: img.size.height)
+        img.draw(in: rect)
+        
+        let normalizedImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        return normalizedImage
+    }
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true) {
             if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
                 if let completiton = self.imageSelectCompletitionHandler
                 {
-                    completiton(true, image)
+                    completiton(true, self.fixOrientation(img: image))
                 }
             }
         }
