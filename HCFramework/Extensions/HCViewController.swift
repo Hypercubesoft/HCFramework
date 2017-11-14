@@ -115,7 +115,10 @@ extension UIViewController
     /// Set Navigation Bar left icon, left cction, right icon and right action
     ///
     /// - Parameters:
+    ///   - backgroundColor: Navigation bar background color
     ///   - title: Navigation bar title
+    ///   - font: Navigation bar title font
+    ///   - titleColor: Navigation bar title color
     ///   - leftIcon: Left icon image for the navigaton bar
     ///   - leftAction: Left action for the navigaton bar
     ///   - rightIcon: Right icon image for the navigaton bar
