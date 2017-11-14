@@ -101,7 +101,7 @@ extension UIViewController
     /// Generate empty navigation bar icon
     ///
     /// - Returns: Generated empty navigation bar icon
-    private func generateEmptyNavigationBarIcon() -> UIImage
+    open func generateEmptyNavigationBarIcon() -> UIImage
     {
         func getImageWithColor(color: UIColor, size: CGSize) -> UIImage
         {
