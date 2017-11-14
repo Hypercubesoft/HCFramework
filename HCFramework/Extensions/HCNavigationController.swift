@@ -77,6 +77,15 @@ extension UINavigationController
         pushViewController(vc, animated: animated)
     }
     
+    /// Clear all previous pages in navigation stack
+    open func hcClearAllPreviousPages()
+    {
+        if let lastVC = self.viewControllers.last
+        {
+            self.viewControllers = [lastVC]
+        }
+    }
+    
     /// A method for opening a page (view controller) defined with given identifier and storyboard name which enables user to define additional parameters for opening that page.
     ///
     /// - Parameters:
