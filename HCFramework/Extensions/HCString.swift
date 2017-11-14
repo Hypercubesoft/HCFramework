@@ -29,6 +29,19 @@ extension String
         return label.frame.height
     }
     
+    
+    /// Calculate width of string for the height text occupies and text font
+    ///
+    /// - Parameters:
+    ///   - height: Text height
+    ///   - font: Text font
+    /// - Returns: Calculated text width
+    public func hcTextWidth(withConstraintedHeight height: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        return ceil(boundingBox.width)
+    }
+    
     /// Return substring from start position to end position of string.
     ///
     /// - Parameters:

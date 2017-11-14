@@ -70,7 +70,7 @@ extension UIImage
     ///   - blendMode: CGBlendMode value to applied on UIImage object.
     ///   - color: UIColor value to applied blendMode on UIImage object.
     /// - Returns: UIImage object over which it is applied sprecific Blend mode with specific color.
-    private func hcPerformBlend(blendMode:CGBlendMode, color:UIColor) -> UIImage?
+    open func hcPerformBlend(blendMode:CGBlendMode, color:UIColor) -> UIImage?
     {
         UIGraphicsBeginImageContext(self.size)
         let context: CGContext? = UIGraphicsGetCurrentContext()
@@ -151,5 +151,48 @@ extension UIImage
         let image: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image!
+    }
+    
+    
+    /// Modify current image with given alpha parameter
+    ///
+    /// - Parameter value: Alpha parameter
+    /// - Returns: Current image modifed by alpha parameter
+    func hcAlpha(_ value:CGFloat) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        draw(at: CGPoint.zero, blendMode: .normal, alpha: value)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
+    
+    /// Current image converted to black-white image
+    var bwImage: UIImage? {
+        guard let cgImage = cgImage,
+            let bwContext = bwContext else {
+                return nil
+        }
+        
+        let rect = CGRect(origin: .zero, size: size)
+        bwContext.draw(cgImage, in: rect)
+        let bwCgImage = bwContext.makeImage()
+        
+        return bwCgImage.flatMap { UIImage(cgImage: $0) }
+    }
+    
+    /// Black-white context for current image
+    private var bwContext: CGContext? {
+        let bwContext = CGContext(data: nil,
+                                  width: Int(size.width * scale),
+                                  height: Int(size.height * scale),
+                                  bitsPerComponent: 8,
+                                  bytesPerRow: Int(size.width * scale),
+                                  space: CGColorSpaceCreateDeviceGray(),
+                                  bitmapInfo: CGImageAlphaInfo.none.rawValue)
+        
+        bwContext?.interpolationQuality = .high
+        bwContext?.setShouldAntialias(false)
+        
+        return bwContext
     }
 }

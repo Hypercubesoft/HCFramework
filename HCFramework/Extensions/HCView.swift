@@ -48,6 +48,48 @@ extension UIView {
         return view
     }
     
+    /// Method for fetching first responder inside given UIView
+    ///
+    /// - Parameter view: UIVIew inside which we are looking for a first responder
+    /// - Returns: Found first responder
+    open static func hcFindFirstResponder(inView view: UIView) -> UIView? {
+        for subView in view.subviews
+        {
+            if subView.isFirstResponder {
+                return subView
+            }
+            if let recursiveSubView = self.hcFindFirstResponder(inView: subView)
+            {
+                return recursiveSubView
+            }
+        }
+        
+        return nil
+    }
+    
+    /// Animated change views' alpha
+    ///
+    /// - Parameters:
+    ///   - value: Final alpha value for the view
+    ///   - animationDuration: Animation duration
+    func hcAnimatedChangeAlpha(toValue value: CGFloat, animationDuration: Double)
+    {
+        UIView.animate(withDuration: animationDuration, animations: {
+            self.alpha = value
+        })
+    }
+    
+    /// Set view border
+    ///
+    /// - Parameters:
+    ///   - borderWidth: Border width
+    ///   - borderColor: Border color
+    func hcSetBorder(borderWidth:CGFloat, borderColor:UIColor)
+    {
+        self.layer.borderColor = borderColor.cgColor
+        self.layer.borderWidth = borderWidth
+    }
+    
     /// Set circled corners of view. Setting will be performed with some delay, because in some cases view frame is unknown.
     open func hcSetCircled()
     {
