@@ -98,18 +98,37 @@ extension UIViewController
         self.navigationItem.titleView = headerLabel
     }
     
-    /// Set Navigation Bar leftIcon, leftAction, rightIcon and rightAction
+    /// Generate empty navigation bar icon
+    ///
+    /// - Returns: Generated empty navigation bar icon
+    private func generateEmptyNavigationBarIcon() -> UIImage
+    {
+        func getImageWithColor(color: UIColor, size: CGSize) -> UIImage
+        {
+            let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+            UIGraphicsBeginImageContextWithOptions(size, false, 0)
+            color.setFill()
+            UIRectFill(rect)
+            let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+            UIGraphicsEndImageContext()
+            return image
+        }
+        let scale = UIScreen.main.scale
+        return getImageWithColor(color: .clear, size: CGSize(width: 25.0*scale, height: 25.0*scale))
+    }
+    
+    /// Set Navigation Bar left icon, left action, right icon and right action
     ///
     /// - Parameters:
     ///   - leftIcon: Left icon image for the navigaton bar
     ///   - leftAction: Left action for the navigaton bar
     ///   - rightIcon: Right icon image for the navigaton bar
     ///   - rightAction: Right action for the navigaton bar
-    open func hcSetNavigationBar(leftIcon:UIImage, leftAction:Selector?, rightIcon:UIImage, rightAction:Selector?)
+    open func hcSetNavigationBar(leftIcon:UIImage? = nil, leftAction:Selector?, rightIcon:UIImage? = nil, rightAction:Selector?)
     {
         self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: leftIcon, style: .plain, target: self, action: leftAction)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: rightIcon, style: .plain, target: self, action: rightAction)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: leftIcon ?? self.generateEmptyNavigationBarIcon(), style: .plain, target: self, action: leftAction)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: rightIcon ?? self.generateEmptyNavigationBarIcon(), style: .plain, target: self, action: rightAction)
     }
     
     /// Set Navigation Bar left icon, left cction, right icon and right action
@@ -123,7 +142,7 @@ extension UIViewController
     ///   - leftAction: Left action for the navigaton bar
     ///   - rightIcon: Right icon image for the navigaton bar
     ///   - rightAction: Right action for the navigaton bar
-    func hcSetNavigationBar(backgroundColor:UIColor = .white, title:String = "", font:UIFont = UIFont.systemFont(ofSize: 17.0), titleColor:UIColor = .black, leftIcon:UIImage = #imageLiteral(resourceName: "emptyIcon"), leftAction:Selector? = nil, rightIcon:UIImage = #imageLiteral(resourceName: "emptyIcon"), rightAction:Selector? = nil)
+    open func hcSetNavigationBar(backgroundColor:UIColor = .white, title:String = "", font:UIFont = UIFont.systemFont(ofSize: 17.0), titleColor:UIColor = .black, leftIcon:UIImage? = nil, leftAction:Selector? = nil, rightIcon:UIImage? = nil, rightAction:Selector? = nil)
     {
         self.hcSetNavigationBar(hidden: false, backgroundColor:backgroundColor, title:title, font:font, titleColor:titleColor)
         self.hcSetNavigationBar(leftIcon: leftIcon, leftAction: leftAction, rightIcon: rightIcon, rightAction: rightAction)
