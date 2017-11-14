@@ -8,7 +8,7 @@
 import UIKit
 
 /// Completion handler without parameters
-public typealias CompletionHandler = () -> Void
+public typealias EmptyCompletionHandler = () -> Void
 
 /// Completion handler with one numerical parameter
 public typealias CompletionNumberHandler = (CGFloat) -> Void
@@ -149,9 +149,9 @@ extension UIViewController
     }
     
     /// Handler which handles event when keyboard will disappear
-    private var hideHandler : CompletionHandler {
+    private var hideHandler : EmptyCompletionHandler {
         get {
-            if let value = objc_getAssociatedObject(self, &AssociatedKeys.HideHandler) as? CompletionHandler
+            if let value = objc_getAssociatedObject(self, &AssociatedKeys.HideHandler) as? EmptyCompletionHandler
             {
                 return value
             }
@@ -184,7 +184,7 @@ extension UIViewController
     ///   - additionalOffset: Additional offset if we don't want a keyboard to be sticked to a text field or to a text view
     open func hcChangeConstraintsConstantBasedOnKeyboardAnimatingPosition(constraints:NSLayoutConstraint..., changeConstraintConstantExactlyBasedOnMoveValue:Bool = false, additionalOffset:CGFloat = 0.0)
     {
-        self.setKeyboardListener(onAppear: { moveValue, keyboardHeight in
+        self.hcSetKeyboardListener(onAppear: { moveValue, keyboardHeight in
             for constraint in constraints
             {
                 constraint.constant = changeConstraintConstantExactlyBasedOnMoveValue ? moveValue + additionalOffset : keyboardHeight + additionalOffset
@@ -209,7 +209,7 @@ extension UIViewController
     /// - Parameters:
     ///   - onAppear: Handler for handling event when keyboard will appear
     ///   - onHide: Handler for handling event when keyboard will disappear
-    open func hcSetKeyboardListener(onAppear:@escaping CompletionTwoNumbersHandler, onHide:@escaping CompletionHandler)
+    open func hcSetKeyboardListener(onAppear:@escaping CompletionTwoNumbersHandler, onHide:@escaping EmptyCompletionHandler)
     {
         self.appearHandler = onAppear
         self.hideHandler = onHide
