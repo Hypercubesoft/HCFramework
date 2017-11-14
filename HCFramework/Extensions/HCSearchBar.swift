@@ -19,12 +19,14 @@ extension UISearchBar {
     ///   - textFont: Text font
     ///   - placeHolderText: Placeholder text
     ///   - searchIcon: Search icon
-    open func hcSetupSearchBar(frame: CGRect, backgroundColor : UIColor, textColor: UIColor, textFont: UIFont, placeHolderText: String, searchIcon:UIImage)
+    open func hcSetupSearchBar(frame: CGRect, backgroundColor : UIColor, textColor: UIColor, textFont: UIFont, placeHolderText: String, searchIcon:UIImage? = nil)
     {
         let textField = self.value(forKey: "searchField") as? UITextField
-        let glassIconView = textField?.leftView as? UIImageView
-        glassIconView?.image = searchIcon
-        
+        if let searchIcon = searchIcon
+        {
+            let glassIconView = textField?.leftView as? UIImageView
+            glassIconView?.image = searchIcon
+        }
         textField?.frame = frame
         textField?.backgroundColor = backgroundColor
         textField?.textColor = textColor
