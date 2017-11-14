@@ -39,63 +39,13 @@ extension UIViewController
         self.navigationController?.hcClearAllPreviousPages()
     }
     
-    /// Set navigation background color header title and title text color.
-    ///
-    /// - Parameters:
-    ///   - hidden: isNavigationBarHiddenand
-    ///   - backgroundColor: Navigation bar background color
-    ///   - title: Navigation bar title
-    ///   - font: Navigation bar title font
-    ///   - titleColor: Navigation bar title color
-    open func hcSetNavigationBar(hidden:Bool, backgroundColor:UIColor = .white, title:String = "", font:UIFont = UIFont.systemFont(ofSize: 17.0), titleColor:UIColor = .black)
-    {
-        self.navigationController?.navigationBar.barTintColor = backgroundColor
-        self.navigationController?.isNavigationBarHidden = hidden
-        self.navigationController?.navigationBar.backgroundColor = backgroundColor
-        let headerLabel = UILabel()
-        headerLabel.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 33.0)
-        headerLabel.textAlignment = .center
-        headerLabel.text = title
-        headerLabel.textColor = titleColor
-        headerLabel.font = font
-        headerLabel.sizeToFit()
-        self.navigationItem.titleView = headerLabel
-    }
     
-    /// Set navigation bar visibility, background color and header image
+    /// Hide or show navigation bar
     ///
-    /// - Parameters:
-    ///   - hidden: Defines if navigation bar is hidden
-    ///   - backgroundColor: Navigation bar background color
-    ///   - navBarHeaderImage: Navigation bar header image
-    open func hcSetNavigationBar(hidden:Bool, backgroundColor:UIColor = .white, navBarHeaderImage:UIImage? = nil)
+    /// - Parameter hidden: Defines if navigation bar is hidden or not
+    open func hcSetNavigationBar(hidden:Bool)
     {
-        self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-        
-        self.navigationController?.navigationBar.barTintColor = backgroundColor
         self.navigationController?.isNavigationBarHidden = hidden
-        self.navigationController?.navigationBar.backgroundColor = backgroundColor
-        
-        if let navBarHeaderImage = navBarHeaderImage
-        {
-            let headerIV = UIImageView(image: navBarHeaderImage)
-            self.navigationItem.titleView = headerIV
-        }
-    }
-    
-    /// Set navigation header title and title text color.
-    ///
-    /// - Parameters:
-    ///   - title: Title for the navigaton header
-    ///   - textColor: Text color for the navigaton header
-    open func hcSetNavigationHeader(title:String, textColor:UIColor)
-    {
-        let headerLabel = UILabel()
-        headerLabel.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 33.0)
-        headerLabel.textAlignment = .center
-        headerLabel.text = title
-        headerLabel.textColor = textColor
-        self.navigationItem.titleView = headerLabel
     }
     
     /// Generate empty navigation bar icon
@@ -117,7 +67,19 @@ extension UIViewController
         return getImageWithColor(color: .clear, size: CGSize(width: 25.0*scale, height: 25.0*scale))
     }
     
-    /// Set Navigation Bar left icon, left action, right icon and right action
+    /// Set navigation bar background color
+    ///
+    /// - Parameter backgroundColor: Navigation bar background color
+    open func hcSetNavigationbarBackgroundColor(backgroundColor:UIColor?)
+    {
+        if let backgroundColor = backgroundColor
+        {
+            self.navigationController?.navigationBar.barTintColor = backgroundColor
+            self.navigationController?.navigationBar.backgroundColor = backgroundColor
+        }
+    }
+    
+    /// Set navigation bar button items
     ///
     /// - Parameters:
     ///   - leftIcon: Left icon image for the navigaton bar
@@ -126,12 +88,13 @@ extension UIViewController
     ///   - rightAction: Right action for the navigaton bar
     open func hcSetNavigationBar(leftIcon:UIImage? = nil, leftAction:Selector?, rightIcon:UIImage? = nil, rightAction:Selector?)
     {
+        self.hcShowNavigationBar()
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: leftIcon ?? self.generateEmptyNavigationBarIcon(), style: .plain, target: self, action: leftAction)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: rightIcon ?? self.generateEmptyNavigationBarIcon(), style: .plain, target: self, action: rightAction)
     }
     
-    /// Set Navigation Bar left icon, left cction, right icon and right action
+    /// Set navigation bar title and navigation bar button items
     ///
     /// - Parameters:
     ///   - backgroundColor: Navigation bar background color
@@ -142,27 +105,73 @@ extension UIViewController
     ///   - leftAction: Left action for the navigaton bar
     ///   - rightIcon: Right icon image for the navigaton bar
     ///   - rightAction: Right action for the navigaton bar
-    open func hcSetNavigationBar(backgroundColor:UIColor = .white, title:String = "", font:UIFont = UIFont.systemFont(ofSize: 17.0), titleColor:UIColor = .black, leftIcon:UIImage? = nil, leftAction:Selector? = nil, rightIcon:UIImage? = nil, rightAction:Selector? = nil)
+    open func hcSetNavigationBar(backgroundColor:UIColor? = nil, title:String = "", font:UIFont? = nil, titleColor:UIColor? = nil, leftIcon:UIImage? = nil, leftAction:Selector? = nil, rightIcon:UIImage? = nil, rightAction:Selector? = nil)
     {
-        self.hcSetNavigationBar(hidden: false, backgroundColor:backgroundColor, title:title, font:font, titleColor:titleColor)
+        self.hcSetNavigationbarBackgroundColor(backgroundColor: backgroundColor)
+        if let font = font
+        {
+            let headerLabel = UILabel()
+            headerLabel.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 33.0)
+            headerLabel.textAlignment = .center
+            headerLabel.text = title
+            headerLabel.font = font
+            headerLabel.sizeToFit()
+            if let titleColor = titleColor
+            {
+                headerLabel.textColor = titleColor
+            }
+            self.navigationItem.titleView = headerLabel
+        }
+        else
+        {
+            self.navigationItem.title = title
+        }
         self.hcSetNavigationBar(leftIcon: leftIcon, leftAction: leftAction, rightIcon: rightIcon, rightAction: rightAction)
     }
     
-    /// Set search bar inside navigation bar
+    
+    /// Set navigation bar header image and navigation bar button items
     ///
-    /// - Parameter searchBar: Search bar which should be places inside navigation bar
-    open func hcSetNavigationBarWithSearcBar(searchBar: UISearchBar)
+    /// - Parameters:
+    ///   - backgroundColor: Navigation bar background color
+    ///   - headerImage: Navigation bar header image
+    ///   - leftIcon: Left icon image for the navigaton bar
+    ///   - leftAction: Left action for the navigaton bar
+    ///   - rightIcon: Right icon image for the navigaton bar
+    ///   - rightAction: Right action for the navigaton bar
+    open func hcSetNavigationBar(backgroundColor:UIColor? = nil, headerImage:UIImage? = nil, leftIcon:UIImage? = nil, leftAction:Selector? = nil, rightIcon:UIImage? = nil, rightAction:Selector? = nil)
     {
-        self.hcHideNavigationBar()
-        
+        self.hcSetNavigationbarBackgroundColor(backgroundColor: backgroundColor)
+        self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+        if let headerImage = headerImage
+        {
+            let headerIV = UIImageView(image: headerImage)
+            self.navigationItem.titleView = headerIV
+        }
+        self.hcSetNavigationBar(leftIcon: leftIcon, leftAction: leftAction, rightIcon: rightIcon, rightAction: rightAction)
+    }
+    
+    
+    /// Set search bar inside navigation bar and navigation bar button items
+    ///
+    /// - Parameters:
+    ///   - backgroundColor: Navigation bar background color
+    ///   - searchBar: Search bar which should be places inside navigation bar
+    ///   - leftIcon: Left icon image for the navigaton bar
+    ///   - leftAction: Left action for the navigaton bar
+    ///   - rightIcon: Right icon image for the navigaton bar
+    ///   - rightAction: Right action for the navigaton bar
+    open func hcSetNavigationBar(backgroundColor:UIColor? = nil, searchBar:UISearchBar, leftIcon:UIImage? = nil, leftAction:Selector? = nil, rightIcon:UIImage? = nil, rightAction:Selector? = nil)
+    {
+        self.hcSetNavigationbarBackgroundColor(backgroundColor: backgroundColor)
         if #available(iOS 11.0, *) {
             if let navigationBarHeight = self.navigationController?.navigationBar.frame.height
             {
                 searchBar.heightAnchor.constraint(equalToConstant: navigationBarHeight).isActive = true
             }
         }
-        
         self.navigationItem.titleView = searchBar
+        self.hcSetNavigationBar(leftIcon: leftIcon, leftAction: leftAction, rightIcon: rightIcon, rightAction: rightAction)
     }
     
     
@@ -290,3 +299,4 @@ extension UIViewController
         hideHandler()
     }
 }
+
