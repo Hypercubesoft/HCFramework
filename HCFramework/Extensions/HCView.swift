@@ -72,7 +72,7 @@ extension UIView {
     /// - Parameters:
     ///   - value: Final alpha value for the view
     ///   - animationDuration: Animation duration
-    func hcAnimatedChangeAlpha(toValue value: CGFloat, animationDuration: Double)
+    open func hcAnimatedChangeAlpha(toValue value: CGFloat, animationDuration: Double)
     {
         UIView.animate(withDuration: animationDuration, animations: {
             self.alpha = value
@@ -84,7 +84,7 @@ extension UIView {
     /// - Parameters:
     ///   - borderWidth: Border width
     ///   - borderColor: Border color
-    func hcSetBorder(borderWidth:CGFloat, borderColor:UIColor)
+    open func hcSetBorder(borderWidth:CGFloat, borderColor:UIColor)
     {
         self.layer.borderColor = borderColor.cgColor
         self.layer.borderWidth = borderWidth

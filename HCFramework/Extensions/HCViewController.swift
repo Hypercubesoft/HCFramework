@@ -33,6 +33,12 @@ extension UIViewController
         self.hcSetNavigationBar(hidden: false)
     }
     
+    /// Clear navigation stack
+    open func hcClearNavigationStack()
+    {
+        self.navigationController?.hcClearAllPreviousPages()
+    }
+    
     /// Set navigation background color header title and title text color.
     ///
     /// - Parameters:

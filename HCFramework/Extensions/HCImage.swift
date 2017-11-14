@@ -158,7 +158,7 @@ extension UIImage
     ///
     /// - Parameter value: Alpha parameter
     /// - Returns: Current image modifed by alpha parameter
-    func hcAlpha(_ value:CGFloat) -> UIImage {
+    open func hcAlpha(_ value:CGFloat) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         draw(at: CGPoint.zero, blendMode: .normal, alpha: value)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -167,7 +167,7 @@ extension UIImage
     }
     
     /// Current image converted to black-white image
-    var bwImage: UIImage? {
+    open var bwImage: UIImage? {
         guard let cgImage = cgImage,
             let bwContext = bwContext else {
                 return nil
