@@ -34,7 +34,7 @@ extension UISearchBar {
         textField?.contentHorizontalAlignment = .center
         textField?.contentVerticalAlignment  = .center
         
-        textField?.attributedPlaceholder = NSAttributedString(string: placeHolderText, attributes: [NSForegroundColorAttributeName : UIColor.white])
+        textField?.attributedPlaceholder = NSAttributedString(string: placeHolderText, attributes: [NSAttributedStringKey.foregroundColor : UIColor.white])
     }
 }
 

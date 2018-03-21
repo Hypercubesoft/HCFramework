@@ -195,7 +195,7 @@ extension UIViewController
             {
                 return value
             }
-            return { _ in }
+            return { _,_ in }
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKeys.AppearHandler, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)

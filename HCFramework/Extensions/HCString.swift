@@ -38,7 +38,7 @@ extension String
     /// - Returns: Calculated text width
     public func hcTextWidth(withConstraintedHeight height: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
-        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil)
         return ceil(boundingBox.width)
     }
     
