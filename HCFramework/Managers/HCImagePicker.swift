@@ -27,20 +27,20 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
     ///
     /// - Parameters:
     ///   - completitionHandler: Completion Handler Function. By default it is not set.
-    open func takePictureFromCamera(completitionHandler:CompletionHandler? = nil)
+    open func takePictureFromCamera(allowEditing: Bool = true, completitionHandler:CompletionHandler? = nil)
     {
         self.imageSelectCompletitionHandler = completitionHandler
-        self.openCamera()
+        self.openCamera(allowEditing: allowEditing)
     }
     
     /// Open UIImagePickerController with PhotosAlbum like source type with the possibility of setting Completition Handler Function.
     ///
     /// - Parameters:
     ///   - completitionHandler: Completion Handler Function. By default it is not set.
-    open func getPictureFromGallery(completitionHandler:CompletionHandler? = nil)
+    open func getPictureFromGallery(allowEditing: Bool = true, completitionHandler:CompletionHandler? = nil)
     {
         self.imageSelectCompletitionHandler = completitionHandler
-        self.openGallery()
+        self.openGallery(allowEditing: allowEditing)
     }
     
     /// Open dialog to choose the image source from where the image will be obtained.
@@ -51,7 +51,7 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
     ///   - fromGalleryButtonTitle: From gallery button title. Default value is "From Gallery".
     ///   - cancelButtonTitle: Cancel button title. Default value is "Cancel".
     ///   - completitionHandler: Completion Handler Function. By default it is not set.
-    open func selectPicture(title:String = "Select picture", fromCameraButtonTitle:String = "From Camera", fromGalleryButtonTitle:String = "From Gallery", cancelButtonTitle:String = "Cancel", completitionHandler:CompletionHandler? = nil)
+    open func selectPicture(title:String = "Select picture", fromCameraButtonTitle:String = "From Camera", fromGalleryButtonTitle:String = "From Gallery", cancelButtonTitle:String = "Cancel", allowEditing: Bool = true, completitionHandler:CompletionHandler? = nil)
     {
         self.imageSelectCompletitionHandler = completitionHandler
         HCDialog.showDialogWithMultipleActions(message: "", title: title, alertButtonTitles:
@@ -62,10 +62,10 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
             , alertButtonActions:
             [
                 { (alert) in
-                    self.openCamera()
+                    self.openCamera(allowEditing: allowEditing)
                 },
                 { (alert) in
-                    self.openGallery()
+                    self.openGallery(allowEditing: allowEditing)
                 },
                 nil
             ], alertButtonStyles:
@@ -77,14 +77,14 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
     }
     
     /// Open UIImagePickerController with Camera like source type
-    private func openCamera()
+    private func openCamera(allowEditing: Bool)
     {
         if UIImagePickerController.isSourceTypeAvailable(.camera)
         {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = .camera
-            imagePicker.allowsEditing = false
+            imagePicker.allowsEditing = allowEditing
             
             imageSelectionInProgress = true
             UIApplication.shared.keyWindow?.rootViewController?.present(imagePicker, animated: true, completion: nil)
@@ -92,13 +92,13 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
     }
     
     /// Open UIImagePickerController with PhotosAlbum like source type
-    private func openGallery()
+    private func openGallery(allowEditing: Bool)
     {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = .savedPhotosAlbum;
-            imagePicker.allowsEditing = false
+            imagePicker.allowsEditing = allowEditing
             
             imageSelectionInProgress = true
             UIApplication.shared.keyWindow?.rootViewController?.present(imagePicker, animated: true, completion: nil)
@@ -126,10 +126,20 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true) {
-            if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-                if let completiton = self.imageSelectCompletitionHandler
-                {
-                    completiton(true, self.fixOrientation(img: image))
+            if picker.allowsEditing
+            {
+                if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+                    if let completiton = self.imageSelectCompletitionHandler
+                    {
+                        completiton(true, self.fixOrientation(img: image))
+                    }
+                }
+            } else {
+                if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                    if let completiton = self.imageSelectCompletitionHandler
+                    {
+                        completiton(true, self.fixOrientation(img: image))
+                    }
                 }
             }
         }
