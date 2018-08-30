@@ -60,7 +60,7 @@ extension UINavigationController
                 if viewController.restorationIdentifier == vc.restorationIdentifier!
                 {
                     // Did find restorationIdentifier. Will perform pop to it.
-                    self.popToViewController(viewController, animated: true)
+                    self.popToViewController(viewController, animated: animated)
                     return
                 }
             }
