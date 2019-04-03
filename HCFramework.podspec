@@ -2,8 +2,7 @@ Pod::Spec.new do |s|
 
 s.platform = :ios
 s.name             = "HCFramework"
-s.version          = "1.2.11"
-s.swift_version    = '4.2'
+s.version          = "1.2.12"
 s.summary          = "These are internal files we use in our company."
 
 s.description      = <<-DESC
