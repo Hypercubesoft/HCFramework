@@ -14,10 +14,10 @@ public typealias CompletionHandler = (_ success:Bool, _ res:AnyObject?) -> Void
 
 open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
-    open var imageSelectionInProgress = false
-    open var imageSelectCompletitionHandler:CompletionHandler?
+    public var imageSelectionInProgress = false
+    public var imageSelectCompletitionHandler:CompletionHandler?
     
-    open static let sharedManager: HCImagePicker =
+    public static let sharedManager: HCImagePicker =
         {
             let instance = HCImagePicker()
             return instance
@@ -27,7 +27,7 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
     ///
     /// - Parameters:
     ///   - completitionHandler: Completion Handler Function. By default it is not set.
-    open func takePictureFromCamera(allowEditing: Bool = true, completitionHandler:CompletionHandler? = nil)
+    public func takePictureFromCamera(allowEditing: Bool = true, completitionHandler:CompletionHandler? = nil)
     {
         self.imageSelectCompletitionHandler = completitionHandler
         self.openCamera(allowEditing: allowEditing)
@@ -37,7 +37,7 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
     ///
     /// - Parameters:
     ///   - completitionHandler: Completion Handler Function. By default it is not set.
-    open func getPictureFromGallery(allowEditing: Bool = true, completitionHandler:CompletionHandler? = nil)
+    public func getPictureFromGallery(allowEditing: Bool = true, completitionHandler:CompletionHandler? = nil)
     {
         self.imageSelectCompletitionHandler = completitionHandler
         self.openGallery(allowEditing: allowEditing)
@@ -51,7 +51,7 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
     ///   - fromGalleryButtonTitle: From gallery button title. Default value is "From Gallery".
     ///   - cancelButtonTitle: Cancel button title. Default value is "Cancel".
     ///   - completitionHandler: Completion Handler Function. By default it is not set.
-    open func selectPicture(title:String = "Select picture", fromCameraButtonTitle:String = "From Camera", fromGalleryButtonTitle:String = "From Gallery", cancelButtonTitle:String = "Cancel", allowEditing: Bool = true, completitionHandler:CompletionHandler? = nil)
+    public func selectPicture(title:String = "Select picture", fromCameraButtonTitle:String = "From Camera", fromGalleryButtonTitle:String = "From Gallery", cancelButtonTitle:String = "Cancel", allowEditing: Bool = true, completitionHandler:CompletionHandler? = nil)
     {
         self.imageSelectCompletitionHandler = completitionHandler
         HCDialog.showDialogWithMultipleActions(message: "", title: title, alertButtonTitles:
@@ -124,18 +124,18 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
         return normalizedImage
     }
     
-    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true) {
             if picker.allowsEditing
             {
-                if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+                if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
                     if let completiton = self.imageSelectCompletitionHandler
                     {
                         completiton(true, self.fixOrientation(img: image))
                     }
                 }
             } else {
-                if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                     if let completiton = self.imageSelectCompletitionHandler
                     {
                         completiton(true, self.fixOrientation(img: image))

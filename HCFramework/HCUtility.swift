@@ -19,7 +19,7 @@ open class HCUtility
     /// - Parameters:
     ///   - seconds: Number of seconds for delay timer.
     ///   - closure: Function that needs to start when the timer runs out.
-    open static func hcDelay(_ seconds:Double, closure:@escaping ()->()) {
+    public static func hcDelay(_ seconds:Double, closure:@escaping ()->()) {
         DispatchQueue.main.asyncAfter(
             deadline: DispatchTime.now() + Double(Int64(seconds * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
     }
@@ -29,7 +29,7 @@ open class HCUtility
     /// Open URL in SFSafariViewController.
     ///
     /// - Parameter urlStr: Url string that you want to open.
-    open static func hcOpenURL(_ urlStr: String)
+    public static func hcOpenURL(_ urlStr: String)
     {
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
             while let presentedViewController = topController.presentedViewController {

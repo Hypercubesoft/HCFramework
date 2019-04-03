@@ -22,19 +22,19 @@ extension UIViewController
     // MARK: - Set up navigation bar
     
     /// Hide navigation bar
-    open func hcHideNavigationBar()
+    public func hcHideNavigationBar()
     {
         self.hcSetNavigationBar(hidden: true)
     }
     
     /// Show navigation bar
-    open func hcShowNavigationBar()
+    public func hcShowNavigationBar()
     {
         self.hcSetNavigationBar(hidden: false)
     }
     
     /// Clear navigation stack
-    open func hcClearNavigationStack()
+    public func hcClearNavigationStack()
     {
         self.navigationController?.hcClearAllPreviousPages()
     }
@@ -43,7 +43,7 @@ extension UIViewController
     /// Hide or show navigation bar
     ///
     /// - Parameter hidden: Defines if navigation bar is hidden or not
-    open func hcSetNavigationBar(hidden:Bool)
+    public func hcSetNavigationBar(hidden:Bool)
     {
         self.navigationController?.isNavigationBarHidden = hidden
     }
@@ -51,7 +51,7 @@ extension UIViewController
     /// Generate empty navigation bar icon
     ///
     /// - Returns: Generated empty navigation bar icon
-    open func generateEmptyNavigationBarIcon() -> UIImage
+    public func generateEmptyNavigationBarIcon() -> UIImage
     {
         func getImageWithColor(color: UIColor, size: CGSize) -> UIImage
         {
@@ -70,7 +70,7 @@ extension UIViewController
     /// Set navigation bar background color
     ///
     /// - Parameter backgroundColor: Navigation bar background color
-    open func hcSetNavigationbarBackgroundColor(backgroundColor:UIColor?)
+    public func hcSetNavigationbarBackgroundColor(backgroundColor:UIColor?)
     {
         if let backgroundColor = backgroundColor
         {
@@ -86,7 +86,7 @@ extension UIViewController
     ///   - leftAction: Left action for the navigaton bar
     ///   - rightIcon: Right icon image for the navigaton bar
     ///   - rightAction: Right action for the navigaton bar
-    open func hcSetNavigationBar(leftIcon:UIImage? = nil, leftAction:Selector?, rightIcon:UIImage? = nil, rightAction:Selector?)
+    public func hcSetNavigationBar(leftIcon:UIImage? = nil, leftAction:Selector?, rightIcon:UIImage? = nil, rightAction:Selector?)
     {
         self.hcShowNavigationBar()
         self.navigationController?.navigationBar.isTranslucent = false
@@ -105,7 +105,7 @@ extension UIViewController
     ///   - leftAction: Left action for the navigaton bar
     ///   - rightIcon: Right icon image for the navigaton bar
     ///   - rightAction: Right action for the navigaton bar
-    open func hcSetNavigationBar(backgroundColor:UIColor? = nil, title:String = "", font:UIFont? = nil, titleColor:UIColor? = nil, leftIcon:UIImage? = nil, leftAction:Selector? = nil, rightIcon:UIImage? = nil, rightAction:Selector? = nil)
+    public func hcSetNavigationBar(backgroundColor:UIColor? = nil, title:String = "", font:UIFont? = nil, titleColor:UIColor? = nil, leftIcon:UIImage? = nil, leftAction:Selector? = nil, rightIcon:UIImage? = nil, rightAction:Selector? = nil)
     {
         self.hcSetNavigationbarBackgroundColor(backgroundColor: backgroundColor)
         if let font = font
@@ -139,7 +139,7 @@ extension UIViewController
     ///   - leftAction: Left action for the navigaton bar
     ///   - rightIcon: Right icon image for the navigaton bar
     ///   - rightAction: Right action for the navigaton bar
-    open func hcSetNavigationBar(backgroundColor:UIColor? = nil, headerImage:UIImage? = nil, leftIcon:UIImage? = nil, leftAction:Selector? = nil, rightIcon:UIImage? = nil, rightAction:Selector? = nil)
+    public func hcSetNavigationBar(backgroundColor:UIColor? = nil, headerImage:UIImage? = nil, leftIcon:UIImage? = nil, leftAction:Selector? = nil, rightIcon:UIImage? = nil, rightAction:Selector? = nil)
     {
         self.hcSetNavigationbarBackgroundColor(backgroundColor: backgroundColor)
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
@@ -161,7 +161,7 @@ extension UIViewController
     ///   - leftAction: Left action for the navigaton bar
     ///   - rightIcon: Right icon image for the navigaton bar
     ///   - rightAction: Right action for the navigaton bar
-    open func hcSetNavigationBar(backgroundColor:UIColor? = nil, searchBar:UISearchBar, leftIcon:UIImage? = nil, leftAction:Selector? = nil, rightIcon:UIImage? = nil, rightAction:Selector? = nil)
+    public func hcSetNavigationBar(backgroundColor:UIColor? = nil, searchBar:UISearchBar, leftIcon:UIImage? = nil, leftAction:Selector? = nil, rightIcon:UIImage? = nil, rightAction:Selector? = nil)
     {
         self.hcSetNavigationbarBackgroundColor(backgroundColor: backgroundColor)
         if #available(iOS 11.0, *) {
@@ -217,7 +217,7 @@ extension UIViewController
     }
     
     /// Allows you to close the keyboard on a tap anywhere within the controller.
-    open func hcHideKeyboardWhenTappedAround()
+    public func hcHideKeyboardWhenTappedAround()
     {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.hcDismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -225,7 +225,7 @@ extension UIViewController
     }
     
     /// Close the keyboard
-    @objc open func hcDismissKeyboard()
+    @objc public func hcDismissKeyboard()
     {
         view.endEditing(true)
     }
@@ -236,7 +236,7 @@ extension UIViewController
     ///   - constraints: Array of constraint which contant value should be changed animated if it is required to avoid keyboard appearing above a text field or text view. Constraints should be set to move a view in right direction when keyboard appears or dissapears (for example, if a view should be pushed up when keyboard appears, increasing constraints constant should support moving that view up, and vice versa)
     ///   - changeConstraintConstantExactlyBasedOnMoveValue: Boolean value which indicates if
     ///   - additionalOffset: Additional offset if we don't want a keyboard to be sticked to a text field or to a text view
-    open func hcChangeConstraintsConstantBasedOnKeyboardAnimatingPosition(constraints:NSLayoutConstraint..., changeConstraintConstantExactlyBasedOnMoveValue:Bool = false, additionalOffset:CGFloat = 0.0)
+    public func hcChangeConstraintsConstantBasedOnKeyboardAnimatingPosition(constraints:NSLayoutConstraint..., changeConstraintConstantExactlyBasedOnMoveValue:Bool = false, additionalOffset:CGFloat = 0.0)
     {
         self.hcSetKeyboardListener(onAppear: { moveValue, keyboardHeight in
             for constraint in constraints
@@ -263,12 +263,12 @@ extension UIViewController
     /// - Parameters:
     ///   - onAppear: Handler for handling event when keyboard will appear
     ///   - onHide: Handler for handling event when keyboard will disappear
-    open func hcSetKeyboardListener(onAppear:@escaping CompletionTwoNumbersHandler, onHide:@escaping EmptyCompletionHandler)
+    public func hcSetKeyboardListener(onAppear:@escaping CompletionTwoNumbersHandler, onHide:@escaping EmptyCompletionHandler)
     {
         self.appearHandler = onAppear
         self.hideHandler = onHide
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: Notification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     /// Handdle event when keyboard will appear
@@ -276,7 +276,7 @@ extension UIViewController
     /// - Parameter notification: Notification which has some information about keyboard, for example keyboard size
     @objc private func keyboardWillAppear(_ notification:NSNotification) {
         //Do something here
-        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
         {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height

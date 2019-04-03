@@ -26,7 +26,7 @@ extension UIImage
     ///
     /// - Parameter percentage: CGFloat value for percentage used to rezize UIImage object
     /// - Returns: Resized UIImage object
-    open func hcResized(withPercentage percentage: CGFloat) -> UIImage?
+    public func hcResized(withPercentage percentage: CGFloat) -> UIImage?
     {
         let canvasSize = CGSize(width: size.width * percentage, height: size.height * percentage)
         UIGraphicsBeginImageContextWithOptions(canvasSize, false, scale)
@@ -39,7 +39,7 @@ extension UIImage
     ///
     /// - Parameter width: CGFloat value for width used to rezize UIImage object
     /// - Returns: Resized UIImage object
-    open func hcResized(toWidth width: CGFloat) -> UIImage?
+    public func hcResized(toWidth width: CGFloat) -> UIImage?
     {
         let canvasSize = CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))
         UIGraphicsBeginImageContextWithOptions(canvasSize, false, scale)
@@ -52,7 +52,7 @@ extension UIImage
     ///
     /// - Parameter color: UIColor value to applied Blend Overlay mode on UIImage object.
     /// - Returns: UIImage object over which it is applied Blend Overlay mode
-    open func hcOverlay(with color: UIColor) -> UIImage? {
+    public func hcOverlay(with color: UIColor) -> UIImage? {
         return self.hcPerformBlend(blendMode: .overlay, color: color)
     }
     
@@ -60,7 +60,7 @@ extension UIImage
     ///
     /// - Parameter color: UIColor value to applied Blend SoftLight mode on UIImage object
     /// - Returns: UIImage object over which it is applied Blend SoftLight mode
-    open func hcSoftLight(with color: UIColor) -> UIImage? {
+    public func hcSoftLight(with color: UIColor) -> UIImage? {
         return self.hcPerformBlend(blendMode: .softLight, color: color)
     }
     
@@ -70,7 +70,7 @@ extension UIImage
     ///   - blendMode: CGBlendMode value to applied on UIImage object.
     ///   - color: UIColor value to applied blendMode on UIImage object.
     /// - Returns: UIImage object over which it is applied sprecific Blend mode with specific color.
-    open func hcPerformBlend(blendMode:CGBlendMode, color:UIColor) -> UIImage?
+    public func hcPerformBlend(blendMode:CGBlendMode, color:UIColor) -> UIImage?
     {
         UIGraphicsBeginImageContext(self.size)
         let context: CGContext? = UIGraphicsGetCurrentContext()
@@ -96,7 +96,7 @@ extension UIImage
     ///
     /// - Parameter rect: CGRect value for rect used to crop UIImage object
     /// - Returns: Croped UIImage object
-    open func hcCropImage(toRect rect:CGRect) -> UIImage? {
+    public func hcCropImage(toRect rect:CGRect) -> UIImage? {
         var rect = rect
         rect.origin.y = rect.origin.y * self.scale
         rect.origin.x = rect.origin.x * self.scale
@@ -114,7 +114,7 @@ extension UIImage
     /// Perform grayscale (CIPhotoEffectMono) filter on current image
     ///
     /// - Returns: Grayscale version of current image.
-    open func hcConvertToGrayScale() -> UIImage {
+    public func hcConvertToGrayScale() -> UIImage {
         let filter: CIFilter = CIFilter(name: "CIPhotoEffectMono")!
         filter.setDefaults()
         filter.setValue(CoreImage.CIImage(image: self)!, forKey: kCIInputImageKey)
@@ -126,7 +126,7 @@ extension UIImage
     ///
     /// - Parameter blurRadius: Radius for blurring image. Default value is 10.0.
     /// - Returns: Blurred image
-    open func hcBlur(blurRadius:CGFloat = 10.0) -> UIImage {
+    public func hcBlur(blurRadius:CGFloat = 10.0) -> UIImage {
         let context = CIContext(options: nil)
         let inputImage = CIImage(image: self)
         let clampFilter = CIFilter(name: "CIAffineClamp")
@@ -144,7 +144,7 @@ extension UIImage
     ///
     /// - Parameter imageView: UIImageView from which the function returns the UIImage object.
     /// - Returns: UIImage object from UIImageView.
-    static open func hcVisibleImage(from imageView: UIImageView) -> UIImage {
+    public static func hcVisibleImage(from imageView: UIImageView) -> UIImage {
         UIGraphicsBeginImageContext(imageView.frame.size)
         let context: CGContext? = UIGraphicsGetCurrentContext()
         imageView.layer.render(in: context!)
@@ -158,7 +158,7 @@ extension UIImage
     ///
     /// - Parameter value: Alpha parameter
     /// - Returns: Current image modifed by alpha parameter
-    open func hcAlpha(_ value:CGFloat) -> UIImage {
+    public func hcAlpha(_ value:CGFloat) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         draw(at: CGPoint.zero, blendMode: .normal, alpha: value)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -167,7 +167,7 @@ extension UIImage
     }
     
     /// Current image converted to black-white image
-    open var bwImage: UIImage? {
+    public var bwImage: UIImage? {
         guard let cgImage = cgImage,
             let bwContext = bwContext else {
                 return nil

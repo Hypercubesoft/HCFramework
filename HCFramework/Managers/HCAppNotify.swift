@@ -20,7 +20,7 @@ open class HCAppNotify {
     /// - Parameters:
     ///   - name: NSNotification name.
     ///   - object: NSNotification object. By default, object is not set.
-    open static func postNotification(_ name: String, object: AnyObject? = nil) {
+    public static func postNotification(_ name: String, object: AnyObject? = nil) {
         notificationCenter.post(name: NSNotification.Name(rawValue: name), object: object)
     }
 
@@ -29,7 +29,7 @@ open class HCAppNotify {
     /// - Parameters:
     ///   - name: NSNotification name.
     ///   - object: NSNotification object. By default, object is not set.
-    open static func postNotification(_ name: NSNotification.Name, object: AnyObject? = nil) {
+    public static func postNotification(_ name: NSNotification.Name, object: AnyObject? = nil) {
         notificationCenter.post(name: name, object: object)
     }
     
@@ -40,7 +40,7 @@ open class HCAppNotify {
     ///   - selector: Selector for NSNotification.
     ///   - name: NSNotification name.
     ///   - object: NSNotification object. By default, object is not set.
-    open static func observeNotification(_ observer: AnyObject, selector: Selector, name: String, object: AnyObject? = nil) {
+    public static func observeNotification(_ observer: AnyObject, selector: Selector, name: String, object: AnyObject? = nil) {
         notificationCenter.addObserver(observer, selector: selector, name: NSNotification.Name(rawValue: name), object: object)
     }
 
@@ -51,12 +51,12 @@ open class HCAppNotify {
     ///   - selector: Selector for NSNotification.
     ///   - name: NSNotification name.
     ///   - object: NSNotification object. By default, object is not set.
-    open static func observeNotification(_ observer: AnyObject, selector: Selector, name: NSNotification.Name, object: AnyObject? = nil) {
+    public static func observeNotification(_ observer: AnyObject, selector: Selector, name: NSNotification.Name, object: AnyObject? = nil) {
         notificationCenter.addObserver(observer, selector: selector, name: name, object: object)
     }
     
     /// Remove the object from the observers
-    open static func removeObserver(_ object: AnyObject) {
+    public static func removeObserver(_ object: AnyObject) {
         notificationCenter.removeObserver(object)
     }
 }

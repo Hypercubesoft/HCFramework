@@ -24,12 +24,12 @@ public enum HCPageType
     case hcYoutubeVideo
 }
 
-open class HCSocialNetworkURL: NSObject {
+public class HCSocialNetworkURL: NSObject {
     
-    open var id:String = ""
-    open var link:String = ""
-    open var urlScheme:String = ""
-    open var pageType:HCPageType = .hcUndefined
+    public var id:String = ""
+    public var link:String = ""
+    public var urlScheme:String = ""
+    public var pageType:HCPageType = .hcUndefined
     
     public init(id:String, link:String, pageType:HCPageType)
     {
@@ -67,14 +67,14 @@ open class HCSocialNetworkURL: NSObject {
     /// Tests whether it's possible to open urlScheme in Native App
     ///
     /// - Returns: It's possible to open urlScheme
-    open func installedNativeApp() -> Bool {
+    public func installedNativeApp() -> Bool {
         return UIApplication.shared.canOpenURL(URL(string: urlScheme)!)
     }
     
     /// Creates appURL based on pagetype and id
     ///
     /// - Returns: AppURL based on pagetype and id
-    open func appUrl() -> String
+    public func appUrl() -> String
     {
         switch pageType
         {
@@ -104,7 +104,7 @@ open class HCSocialNetworkURL: NSObject {
     }
     
     /// Open link in app if it is possible, or open it in browser
-    open func open()
+    public func open()
     {
         if self.installedNativeApp()
         {

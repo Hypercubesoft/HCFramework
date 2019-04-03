@@ -19,7 +19,7 @@ extension UISearchBar {
     ///   - textFont: Text font
     ///   - placeHolderText: Placeholder text
     ///   - searchIcon: Search icon
-    open func hcSetupSearchBar(frame: CGRect, backgroundColor : UIColor, textColor: UIColor, textFont: UIFont, placeHolderText: String, searchIcon:UIImage? = nil)
+    public func hcSetupSearchBar(frame: CGRect, backgroundColor : UIColor, textColor: UIColor, textFont: UIFont, placeHolderText: String, searchIcon:UIImage? = nil)
     {
         let textField = self.value(forKey: "searchField") as? UITextField
         if let searchIcon = searchIcon
@@ -34,7 +34,7 @@ extension UISearchBar {
         textField?.contentHorizontalAlignment = .center
         textField?.contentVerticalAlignment  = .center
         
-        textField?.attributedPlaceholder = NSAttributedString(string: placeHolderText, attributes: [NSAttributedStringKey.foregroundColor : UIColor.white])
+        textField?.attributedPlaceholder = NSAttributedString(string: placeHolderText, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
     }
 }
 

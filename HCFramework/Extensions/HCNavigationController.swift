@@ -13,7 +13,7 @@ extension UINavigationController
     /// A wrapper method for popViewController, which is used to open previous page in navigation stack.
     ///
     /// - Parameter animated: Defines if transition to previous page is animated. Default value is true.
-    open func hcGoBack(animated:Bool = true)
+    public func hcGoBack(animated:Bool = true)
     {
         let viewControllers = self.viewControllers
         
@@ -31,7 +31,7 @@ extension UINavigationController
     /// A wrapper method for popToRootViewController, which is used to open root page (view controller) in navigation stack.
     ///
     /// - Parameter animated: Defines if transition to root page (view controller) is animated. Default value is true.
-    open func hcPopToRootVC(animated:Bool = true)
+    public func hcPopToRootVC(animated:Bool = true)
     {
         self.popToRootViewController(animated: animated)
     }
@@ -44,7 +44,7 @@ extension UINavigationController
     ///   - clearAll: Defines if navigation stack has to be cleared leaving only current top view controller in navigation stack. Default value is false.
     ///   - popToVCIfExists: Defines if navigation controller has to pop to defined view controller (if a view controller with same restorationIdentifier is already in navigation stack) instead of pushing that view controller. Default value is false.
     ///   - allowSameVC: Defines if it is allowed to open a view controller if a view controller wish same restorationIdentifier is already on the top of the navigation stack. Default value is false.
-    open func hcOpenVC(_ vc:UIViewController, animated:Bool = true, clearAll:Bool = false, popToVCIfExists:Bool = false, allowSameVC:Bool = false)
+    public func hcOpenVC(_ vc:UIViewController, animated:Bool = true, clearAll:Bool = false, popToVCIfExists:Bool = false, allowSameVC:Bool = false)
     {
         if !allowSameVC && self.viewControllers.count > 0 && self.viewControllers.last?.restorationIdentifier == vc.restorationIdentifier!
         {
@@ -78,7 +78,7 @@ extension UINavigationController
     }
     
     /// Clear all previous pages in navigation stack
-    open func hcClearAllPreviousPages()
+    public func hcClearAllPreviousPages()
     {
         if let lastVC = self.viewControllers.last
         {
@@ -95,7 +95,7 @@ extension UINavigationController
     ///   - clearAll: Defines if navigation stack has to be cleared leaving only current top view controller in navigation stack. Default value is false.
     ///   - popToVCIfExists: efines if navigation controller has to pop to defined view controller (if a view controller with same restorationIdentifier is already in navigation stack) instead of pushing that view controller. Default value is false.
     ///   - allowSameVC: Defines if it is allowed to open a view controller if a view controller wish same restorationIdentifier is already on the top of the navigation stack. Default value is false.
-    open func hcOpenVC(_ identifier:String, storyBoardName:String = "Main", animated:Bool = true, clearAll:Bool = false, popToVCIfExists:Bool = false, allowSameVC:Bool = false)
+    public func hcOpenVC(_ identifier:String, storyBoardName:String = "Main", animated:Bool = true, clearAll:Bool = false, popToVCIfExists:Bool = false, allowSameVC:Bool = false)
     {
         hcOpenVC(hcGetVCForIdentifier(identifier, storyBoardName: storyBoardName), animated:animated, clearAll:clearAll, popToVCIfExists:popToVCIfExists, allowSameVC:allowSameVC)
     }
@@ -106,7 +106,7 @@ extension UINavigationController
     ///   - identifier: Restoration identifier for view controller which has to be presented.
     ///   - storyBoardName: Storyboard name from which we get a view controller with a given (restoration) identifier to be presented. Default value is "Main".
     /// - Returns: UIViewController instance initialized using given storyboard name and (restoration) identifier.
-    open func hcGetVCForIdentifier(_ identifier:String, storyBoardName:String = "Main") -> UIViewController
+    public func hcGetVCForIdentifier(_ identifier:String, storyBoardName:String = "Main") -> UIViewController
     {
         let storyboard = UIStoryboard(name:storyBoardName, bundle:nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: identifier)
@@ -118,7 +118,7 @@ extension UINavigationController
     ///
     /// - Parameter controller: Provided UIViewController instance for which we are searching for top view controller.
     /// - Returns: Top UIViewController instance
-    static open func hcTopVC(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+    public static func hcTopVC(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let navigationController = controller as? UINavigationController {
             return hcTopVC(controller: navigationController.visibleViewController)
         }
@@ -136,7 +136,7 @@ extension UINavigationController
     /// Find and return navigation controller which can be used for navigation in application.
     ///
     /// - Returns: UINavigationController instance, i.e. navigation controller which should be used for other methods in this extension.
-    static open func hcGetNC() -> UINavigationController
+    public static func hcGetNC() -> UINavigationController
     {
         return self.hcTopVC()!.navigationController!
     }

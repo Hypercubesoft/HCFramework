@@ -19,7 +19,7 @@ open class HCDialog: NSObject
     ///   - message: Dialog message string.
     ///   - title: Dialog title string.
     ///   - buttonTitle: Button title string. Default value is "Ok".
-    open static func showDialog(message: String, title: String, buttonTitle: String = "Ok")
+    public static func showDialog(message: String, title: String, buttonTitle: String = "Ok")
     {
         self.showDialogWithMultipleActions(message: message, title: title, alertButtonTitles: [buttonTitle], alertButtonActions: [nil], alertButtonStyles: [.cancel])
     }
@@ -31,7 +31,7 @@ open class HCDialog: NSObject
     ///   - title: Dialog title string.
     ///   - okButtonTitle: Button title for "Ok" button. Default value is "Ok".
     ///   - action: Completion block which will be performed when the okButton is pressed.
-    open static func showDialogWithAction(message: String, title: String, okButtonTitle:String = "Ok", action:((UIAlertAction) -> Void)?)
+    public static func showDialogWithAction(message: String, title: String, okButtonTitle:String = "Ok", action:((UIAlertAction) -> Void)?)
     {
         self.showDialogWithMultipleActions(message: message, title: title, alertButtonTitles:
             [
@@ -58,7 +58,7 @@ open class HCDialog: NSObject
     ///   - action1: Completion block which will be performed when the button 1 is pressed.
     ///   - buttonTitle2: Button title for button 2.
     ///   - action2: Completion block which will be performed when the button 2 is pressed.
-    open static func showDialogWithTwoActionButtons(message: String, title: String, buttonTitle1:String, action1:((UIAlertAction) -> Void)?, buttonTitle2:String, action2:((UIAlertAction) -> Void)?)
+    public static func showDialogWithTwoActionButtons(message: String, title: String, buttonTitle1:String, action1:((UIAlertAction) -> Void)?, buttonTitle2:String, action2:((UIAlertAction) -> Void)?)
     {
         self.showDialogWithMultipleActions(message: message, title: title, alertButtonTitles:
             [
@@ -82,7 +82,7 @@ open class HCDialog: NSObject
     ///   - action2: Completion block which will be performed when the button 2 is pressed.
     ///   - buttonTitle3: Button title for button 3.
     ///   - action3: Completion block which will be performed when the button 3 is pressed.
-   open static func showDialogWithThreeActionButtons(message: String, title: String, buttonTitle1:String, action1:((UIAlertAction) -> Void)?, buttonTitle2:String, action2:((UIAlertAction) -> Void)?, buttonTitle3:String, action3:((UIAlertAction) -> Void)?)
+   public static func showDialogWithThreeActionButtons(message: String, title: String, buttonTitle1:String, action1:((UIAlertAction) -> Void)?, buttonTitle2:String, action2:((UIAlertAction) -> Void)?, buttonTitle3:String, action3:((UIAlertAction) -> Void)?)
     {
         self.showDialogWithMultipleActions(message: message, title: title, alertButtonTitles:
             [
@@ -105,9 +105,9 @@ open class HCDialog: NSObject
     ///   - alertButtonTitles: Array with alert button titles. Default array is empty array. Default alert button title is empty string ("")
     ///   - alertButtonActions: Array with alert button actions. Default array is empty array. Default value for single action in the array is nil.
     ///   - alertButtonStyles: Array with alert button styles. Default array is empty array. Default value for UIAlertActionStyle instance in array is .default. Note: Dialog can have only one action button with .cancel style.
-    open static func showDialogWithMultipleActions(message: String, title: String, alertButtonTitles:[String], alertButtonActions:[((UIAlertAction) -> Void)?], alertButtonStyles:[UIAlertActionStyle] = [])
+    public static func showDialogWithMultipleActions(message: String, title: String, alertButtonTitles:[String], alertButtonActions:[((UIAlertAction) -> Void)?], alertButtonStyles:[UIAlertAction.Style] = [])
     {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         for i in 0...alertButtonTitles.count-1
         {

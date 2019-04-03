@@ -17,7 +17,7 @@ extension NSAttributedString
     ///   - width: The width that the AttributedString occupies
     ///   - lineNumber: number of lines for AttributedString
     /// - Returns: Height of AttributedString
-    open func hcTextHeight(font:UIFont, width:CGFloat, lineNumber: Int) -> CGFloat
+    public func hcTextHeight(font:UIFont, width:CGFloat, lineNumber: Int) -> CGFloat
     {
         let label:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
         label.numberOfLines = lineNumber

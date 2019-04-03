@@ -17,7 +17,7 @@ extension UIView {
     ///   - viewHolder: UIView for view holder of nib view. By default viewHolder is not set.
     /// - Returns: UIView of generic type loaded from a nib (xib) file
     @discardableResult
-    open class func hcLoadFromNib<T : UIView>(named nibName:String, into viewHolder:UIView? = nil) -> T?
+    public class func hcLoadFromNib<T : UIView>(named nibName:String, into viewHolder:UIView? = nil) -> T?
     {
         if let viewHolder = viewHolder
         {
@@ -38,10 +38,10 @@ extension UIView {
         {
             viewHolder.addSubview(view)
             view.translatesAutoresizingMaskIntoConstraints = false
-            let topConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: viewHolder, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0)
-            let bottomConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: viewHolder, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0)
-            let leftConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.leading, relatedBy: NSLayoutRelation.equal, toItem: viewHolder, attribute: NSLayoutAttribute.leading, multiplier: 1, constant: 0)
-            let rightConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: viewHolder, attribute: NSLayoutAttribute.trailing, multiplier: 1, constant: 0)
+            let topConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: viewHolder, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 0)
+            let bottomConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: viewHolder, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: 0)
+            let leftConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: viewHolder, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: 0)
+            let rightConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: viewHolder, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1, constant: 0)
             
             viewHolder.addConstraints([topConstraint, bottomConstraint, leftConstraint, rightConstraint])
         }
@@ -52,7 +52,7 @@ extension UIView {
     ///
     /// - Parameter view: UIVIew inside which we are looking for a first responder
     /// - Returns: Found first responder
-    open static func hcFindFirstResponder(inView view: UIView) -> UIView? {
+    public static func hcFindFirstResponder(inView view: UIView) -> UIView? {
         for subView in view.subviews
         {
             if subView.isFirstResponder {
@@ -72,7 +72,7 @@ extension UIView {
     /// - Parameters:
     ///   - value: Final alpha value for the view
     ///   - animationDuration: Animation duration
-    open func hcAnimatedChangeAlpha(toValue value: CGFloat, animationDuration: Double)
+    public func hcAnimatedChangeAlpha(toValue value: CGFloat, animationDuration: Double)
     {
         UIView.animate(withDuration: animationDuration, animations: {
             self.alpha = value
@@ -84,14 +84,14 @@ extension UIView {
     /// - Parameters:
     ///   - borderWidth: Border width
     ///   - borderColor: Border color
-    open func hcSetBorder(borderWidth:CGFloat, borderColor:UIColor)
+    public func hcSetBorder(borderWidth:CGFloat, borderColor:UIColor)
     {
         self.layer.borderColor = borderColor.cgColor
         self.layer.borderWidth = borderWidth
     }
     
     /// Set circled corners of view. Setting will be performed with some delay, because in some cases view frame is unknown.
-    open func hcSetCircled()
+    public func hcSetCircled()
     {
         self.perform(#selector(hcSetCircleDelayed), with: nil, afterDelay: 0.001)
     }
@@ -105,7 +105,7 @@ extension UIView {
     /// Set rounded corners of view.
     ///
     /// - Parameter cornerRadius: CGFloat value of corner radius of view.
-    open func hcSetCornerRadius(cornerRadius:CGFloat)
+    public func hcSetCornerRadius(cornerRadius:CGFloat)
     {
         self.layer.cornerRadius = cornerRadius
         self.layer.masksToBounds = true
