@@ -46,7 +46,7 @@ open class HCDialog: NSObject
             [
                 .default,
                 .cancel
-            ])
+        ])
     }
     
     /// Show dialog in root VC with specific title and message. The dialog has two action button.
@@ -68,7 +68,7 @@ open class HCDialog: NSObject
             [
                 action1,
                 action2
-            ])
+        ])
     }
     
     /// Show dialog in root VC with specific title and message. The dialog has three action button.
@@ -94,7 +94,7 @@ open class HCDialog: NSObject
                 action1,
                 action2,
                 action3
-            ])
+        ])
     }
 
     /// Show dialog in root VC with specific title and message. The dialog has multiple action buttons.
@@ -107,7 +107,7 @@ open class HCDialog: NSObject
     ///   - alertButtonStyles: Array with alert button styles. Default array is empty array. Default value for UIAlertActionStyle instance in array is .default. Note: Dialog can have only one action button with .cancel style.
     public static func showDialogWithMultipleActions(message: String, title: String, alertButtonTitles:[String], alertButtonActions:[((UIAlertAction) -> Void)?], alertButtonStyles:[UIAlertAction.Style] = [])
     {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         
         for i in 0...alertButtonTitles.count-1
         {

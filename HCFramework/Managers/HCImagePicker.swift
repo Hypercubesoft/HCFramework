@@ -14,8 +14,8 @@ public typealias CompletionHandler = (_ success:Bool, _ res:AnyObject?) -> Void
 
 open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
-    public var imageSelectionInProgress = false
-    public var imageSelectCompletitionHandler:CompletionHandler?
+    open var imageSelectionInProgress = false
+    open var imageSelectCompletitionHandler:CompletionHandler?
     
     public static let sharedManager: HCImagePicker =
         {
@@ -27,7 +27,7 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
     ///
     /// - Parameters:
     ///   - completitionHandler: Completion Handler Function. By default it is not set.
-    public func takePictureFromCamera(allowEditing: Bool = true, completitionHandler:CompletionHandler? = nil)
+    open func takePictureFromCamera(allowEditing: Bool = true, completitionHandler:CompletionHandler? = nil)
     {
         self.imageSelectCompletitionHandler = completitionHandler
         self.openCamera(allowEditing: allowEditing)
@@ -37,7 +37,7 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
     ///
     /// - Parameters:
     ///   - completitionHandler: Completion Handler Function. By default it is not set.
-    public func getPictureFromGallery(allowEditing: Bool = true, completitionHandler:CompletionHandler? = nil)
+    open func getPictureFromGallery(allowEditing: Bool = true, completitionHandler:CompletionHandler? = nil)
     {
         self.imageSelectCompletitionHandler = completitionHandler
         self.openGallery(allowEditing: allowEditing)
@@ -51,7 +51,7 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
     ///   - fromGalleryButtonTitle: From gallery button title. Default value is "From Gallery".
     ///   - cancelButtonTitle: Cancel button title. Default value is "Cancel".
     ///   - completitionHandler: Completion Handler Function. By default it is not set.
-    public func selectPicture(title:String = "Select picture", fromCameraButtonTitle:String = "From Camera", fromGalleryButtonTitle:String = "From Gallery", cancelButtonTitle:String = "Cancel", allowEditing: Bool = true, completitionHandler:CompletionHandler? = nil)
+    open func selectPicture(title:String = "Select picture", fromCameraButtonTitle:String = "From Camera", fromGalleryButtonTitle:String = "From Gallery", cancelButtonTitle:String = "Cancel", allowEditing: Bool = true, completitionHandler:CompletionHandler? = nil)
     {
         self.imageSelectCompletitionHandler = completitionHandler
         HCDialog.showDialogWithMultipleActions(message: "", title: title, alertButtonTitles:
@@ -73,7 +73,7 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
                 .default,
                 .default,
                 .cancel
-            ])
+        ])
     }
     
     /// Open UIImagePickerController with Camera like source type
@@ -124,21 +124,21 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
         return normalizedImage
     }
     
-    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true) {
             if picker.allowsEditing
             {
-                if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-                    if let completiton = self.imageSelectCompletitionHandler
+                if let image = info[UIImagePickerController.InfoKey.editedImage.rawValue] as? UIImage {
+                    if let completion = self.imageSelectCompletitionHandler
                     {
-                        completiton(true, self.fixOrientation(img: image))
+                        completion(true, self.fixOrientation(img: image))
                     }
                 }
             } else {
-                if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                    if let completiton = self.imageSelectCompletitionHandler
+                if let image = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
+                    if let completion = self.imageSelectCompletitionHandler
                     {
-                        completiton(true, self.fixOrientation(img: image))
+                        completion(true, self.fixOrientation(img: image))
                     }
                 }
             }
@@ -148,9 +148,9 @@ open class HCImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigatio
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         
         picker.dismiss(animated: true, completion: {
-            if let completiton = self.imageSelectCompletitionHandler
+            if let completion = self.imageSelectCompletitionHandler
             {
-                completiton(false, nil)
+                completion(false, nil)
             }
         })
     }

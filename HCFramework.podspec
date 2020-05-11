@@ -2,7 +2,8 @@ Pod::Spec.new do |s|
 
 s.platform = :ios
 s.name             = "HCFramework"
-s.version          = "1.2.12"
+s.version          = "1.3.1"
+s.swift_versions = ['5.0']
 s.summary          = "These are internal files we use in our company."
 
 s.description      = <<-DESC
@@ -14,7 +15,7 @@ s.license          = { :type => "MIT", :file => "LICENSE" }
 s.author           = { "Hypercubesoft" => "office@hypercubesoft.com" }
 s.source           = { :git => "https://github.com/Hypercubesoft/HCFramework.git", :tag => "#{s.version}"}
 
-s.ios.deployment_target = "9.0"
+s.ios.deployment_target = "10.0"
 s.source_files = "HCFramework", "HCFramework/*", "HCFramework/**/*"
 
 end

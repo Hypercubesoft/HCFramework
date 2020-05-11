@@ -12,27 +12,27 @@ import Foundation
 open class HCDispatcher: NSObject {
 
     /// Number of tasks which are in progress.
-    public var tasksToFinish: Int = 0
+    open var tasksToFinish: Int = 0
     
     /// Completion handler, i.e. operation which has to be performed when all tasks are finished (when tasksToFinish = 0)
-    public var completionHandler: () -> Void = {}
+    open var completionHandler: () -> Void = {}
 
     /// Method for setting completion handler.
     ///
     /// - Parameter handler: Operation which has to be performed when all tasks are finished.
-    public func setCompletitionHandler(handler: @escaping () -> Void)
+    open func setCompletitionHandler(handler: @escaping () -> Void)
     {
         completionHandler = handler
     }
     
     /// Signal that a task has started.
-    public func startTask()
+    open func startTask()
     {
         tasksToFinish += 1
     }
     
     /// Signal that a task is done and to check if all tasks are done.
-    public func endTask()
+    open func endTask()
     {
         tasksToFinish -= 1
         
@@ -40,7 +40,7 @@ open class HCDispatcher: NSObject {
     }
     
     /// Check if all tasks are done. If it is true, then completion handler is performed.
-    public func checkIfAllTasksDone()
+    open func checkIfAllTasksDone()
     {
         if tasksToFinish == 0
         {

@@ -17,7 +17,7 @@ extension UIView {
     ///   - viewHolder: UIView for view holder of nib view. By default viewHolder is not set.
     /// - Returns: UIView of generic type loaded from a nib (xib) file
     @discardableResult
-    public class func hcLoadFromNib<T : UIView>(named nibName:String, into viewHolder:UIView? = nil) -> T?
+    open class func hcLoadFromNib<T : UIView>(named nibName:String, into viewHolder:UIView? = nil) -> T?
     {
         if let viewHolder = viewHolder
         {
@@ -72,7 +72,7 @@ extension UIView {
     /// - Parameters:
     ///   - value: Final alpha value for the view
     ///   - animationDuration: Animation duration
-    public func hcAnimatedChangeAlpha(toValue value: CGFloat, animationDuration: Double)
+    open func hcAnimatedChangeAlpha(toValue value: CGFloat, animationDuration: Double)
     {
         UIView.animate(withDuration: animationDuration, animations: {
             self.alpha = value
@@ -84,14 +84,14 @@ extension UIView {
     /// - Parameters:
     ///   - borderWidth: Border width
     ///   - borderColor: Border color
-    public func hcSetBorder(borderWidth:CGFloat, borderColor:UIColor)
+    open func hcSetBorder(borderWidth:CGFloat, borderColor:UIColor)
     {
         self.layer.borderColor = borderColor.cgColor
         self.layer.borderWidth = borderWidth
     }
     
     /// Set circled corners of view. Setting will be performed with some delay, because in some cases view frame is unknown.
-    public func hcSetCircled()
+    open func hcSetCircled()
     {
         self.perform(#selector(hcSetCircleDelayed), with: nil, afterDelay: 0.001)
     }
@@ -105,7 +105,7 @@ extension UIView {
     /// Set rounded corners of view.
     ///
     /// - Parameter cornerRadius: CGFloat value of corner radius of view.
-    public func hcSetCornerRadius(cornerRadius:CGFloat)
+    open func hcSetCornerRadius(cornerRadius:CGFloat)
     {
         self.layer.cornerRadius = cornerRadius
         self.layer.masksToBounds = true
